@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Good Note</string>
+    <string name="content">Note: </string>
+    <string name="date_in_millis">Date: </string>
+    <string name="insert">Add Note</string>
+    <string name="get_all">GetNotes</string>
+    <string name="msg_note_created">Note saved!</string>
+    <string name="msg_note_not_created">Error when saving note!</string>
+    <string name="msg_server_error">Server error!</string>
+    <string name="msg_notes_not_fetched">Could not get list of notes!</string>
+    <string name="delete">Delete</string>
+    <string name="msg_note_deleted">Note deleted successfully!</string>
+    <string name="msg_note_not_deleted">There was an error when deleting the note!</string>
+    <string name="back">Back</string>
+    <string name="save">Save</string>
+    <string name="refresh">Refresh</string>
+</resources>
