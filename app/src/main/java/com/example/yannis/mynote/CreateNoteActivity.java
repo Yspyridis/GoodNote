@@ -5,8 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +27,13 @@ public class CreateNoteActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+
+        Date curDate = new Date(System.currentTimeMillis());
+        DateFormat formatter = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm z");
+//        String dateFormatted = formatter.format(date);
+
+        EditText date = findViewById(R.id.txt_date);
+        date.setText(formatter.format(curDate));
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(NotesApi.BASE_URL)

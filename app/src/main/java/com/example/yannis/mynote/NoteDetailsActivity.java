@@ -43,14 +43,14 @@ public class NoteDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_details);
 
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(NotesApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         notesApi = retrofit.create(NotesApi.class);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String content = intent.getStringExtra(EXTRA_CONTENT);
         String dateInMillis = intent.getStringExtra(EXTRA_DATEINMILLIS);
 
@@ -72,7 +72,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteNoteFromServer();
+                deleteNoteFromServer(retrofit, intent);
                 startActivity(new Intent(NoteDetailsActivity.this, MainActivity.class));
             }
         });
@@ -85,17 +85,13 @@ public class NoteDetailsActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteNoteFromServer() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(NotesApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    private void deleteNoteFromServer(Retrofit retrofit, Intent intent) {
 
         notesApi = retrofit.create(NotesApi.class);
 
-        Intent intent = getIntent();
         String websafeKey = intent.getStringExtra(EXTRA_WEBSAFEKEY);
         System.out.println("KEY: "+websafeKey);
+
         notesApi.deleteNote(websafeKey)
                 .enqueue(new Callback<Void>() {
                     @Override

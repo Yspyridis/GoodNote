@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         notesApi = retrofit.create(NotesApi.class);
 
-        lvResults = (ListView) findViewById(R.id.lv_results);
+        lvResults = findViewById(R.id.lv_results);
         lvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<ListResponse> call, Response<ListResponse> response) {
                         if (response.isSuccessful()) {
                             notes = response.body().getNotes();
-                            lvResults.setAdapter(new ArrayAdapter<Note>(MainActivity.this, android.R.layout.simple_list_item_1, notes));
+                            lvResults.setAdapter(new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line, notes));
                         } else {
                             showToast(R.string.msg_notes_not_fetched);
                         }
